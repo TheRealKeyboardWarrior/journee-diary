@@ -1,11 +1,11 @@
 {
-  "name": "Journee",
-  "productName": "Journee",
+  "name": "Journee++",
+  "productName": "Journee++",
   "description": "A Daily Journal App",
-  "version": "1.1.2",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adueck/journee"
+    "url": "git+https://github.com/TheRealKeyboardWarrior/journeeplusplus.git"
   },
   "keywords": [
     "journal",
@@ -13,7 +13,7 @@
     "notebook",
     "note"
   ],
-  "author": "Adam Dueck",
+  "author": "The Real Keyboard Warrior",
   "license": "Apache-2.0",
   "main": "main.js",
   "dependencies": {
@@ -37,7 +37,7 @@
     "distl": "electron-builder -l"
   },
   "build": {
-    "appId": "com.adueck.journee",
+    "appId": "org.therealkeyboardwarrior.journee",
     "nsis": {
       "artifactName": "${productName}-${version}-setup.${ext}",
       "deleteAppDataOnUninstall": true
