@@ -37,12 +37,12 @@ Double-clicking the JourneePlusPlus file will open the application.
 
 Clone the repository
 ```
-git clone https://github.com/adueck/journee-diary
+git clone https://github.com/TheRealKeyboardWarrior/journeeplusplus.git
 ```
 
 Move into the app directory
 ```
-cd journee-diary
+cd journeeplusplus
 ```
 
 then install dependencies and run
