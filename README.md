@@ -16,6 +16,8 @@ Journee but..
 
 ### Installing and Running
 
+You can find the [Downloads](https://github.com/TheRealKeyboardWarrior/journeeplusplus/releases).
+
 #### Linux
 ```
 chmod +x JourneePlusPlus-1.0.0.AppImage
