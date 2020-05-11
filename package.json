@@ -33,14 +33,20 @@
     "postinstall": "install-app-deps",
     "start": "electron . --enable-logging",
     "dev": "NODE_ENV='development' npm run start",
-    "dist": "electron-builder --win",
-    "distl": "electron-builder -l"
+    "dist": "electron-builder -mwl"
   },
   "build": {
     "appId": "org.therealkeyboardwarrior.journee",
     "nsis": {
       "artifactName": "${productName}-${version}-setup.${ext}",
       "deleteAppDataOnUninstall": true
+    },
+    "mac": {
+      "target": "zip"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "journeepngicon.png"
     },
     "asar": true,
     "forceCodeSigning": false

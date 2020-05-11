@@ -224,7 +224,9 @@ function save() {
       saveEntry(currentFileOpen, document.getElementById("textArea").value);
     }
     else {
-      deleteEntry(currentFileOpen);
+      if (confirm("Delete the following file?\n" + currentFileOpen)) {
+        deleteEntry(currentFileOpen);
+      }
     }
 }
 
@@ -266,8 +268,8 @@ function updateCapitalize() {
     var sel = getInputSelection(t);
     let v = t.value;
     v = v.charAt(0).toUpperCase() + v.slice(1)
-    let capitalize_dots = (s) => ". " +  s.charAt(2).toUpperCase()
-    v = v.replace(/(\. [a-z])/g, capitalize_dots);
+    let capitalize_dots = (s) => s.charAt(0) + " " +  s.charAt(2).toUpperCase()
+    v = v.replace(/([\.\?\!] [a-z])/g, capitalize_dots);
     let capitalize_newlines = (s) => "\n" +  s.charAt(1).toUpperCase()
     v = v.replace(/(\n[a-z])/g, capitalize_newlines);
     document.getElementById("textArea").value = v;
@@ -305,7 +307,7 @@ $('#helpModal').on('show.bs.modal', function (event) {
 
 // Automatic save before closing
 window.onbeforeunload = function(){
-   save();
+  save();
 }
 
 function myNavFunction(id) {

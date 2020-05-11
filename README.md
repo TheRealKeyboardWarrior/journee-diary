@@ -16,9 +16,20 @@ Journee but..
 
 ### Installing and Running
 
-#### Windows Installer Binary
+#### Linux
+```
+chmod +x JourneePlusPlus-1.0.0.AppImage
+./JourneePlusPlus-1.0.0.AppImage
+```
 
-[Download Here](https://s3.amazonaws.com/journee-app/Journee-1.1.1-setup.exe)
+#### Windows
+
+Just double-click the file and the installer will do the work!
+
+#### MacOS
+
+Create a folder called `Journee` anywhere, unzip the file `JourneePlusPlus-1.0.0-mac.zip` in that folder.
+Double-clicking the JourneePlusPlus file will open the application.
 
 #### Run From Source with Electron
 
