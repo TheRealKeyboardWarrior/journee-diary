@@ -3,6 +3,7 @@ var activeBadge = "";
 var calendarMonth;
 var calendarYear;
 require('bootstrap-add-clear');
+var showdown = require('showdown');
 
 //TODO: check to see if chosen folder exists when opening
 
@@ -41,6 +42,39 @@ storage.has('fontSizePreference', function(error, hasKey) {
 	}
 });
 
+storage.has('fontTypePreference', function(error, hasKey) {
+  if (error) throw error;
+  if (hasKey) {
+		storage.get('fontTypePreference', function(error, data) {
+		  if (error) throw error;
+      document.getElementById("textArea").style.fontFamily = data.fontTypePreference;
+      document.getElementById("markdownPreview").style.fontFamily = data.fontTypePreference;
+	    document.getElementById("fontType").value = data.fontTypePreference;
+		});
+  }
+	else {
+		storage.set('fontTypePreference', { fontTypePreference: "Consolas,monaco,monospace" }, function(error) {
+			if (error) throw error;
+		});
+    document.getElementById("fontType").value = "Consolas,monaco,monospace";
+	}
+});
+
+storage.has('capitalizePreference', function(error, hasKey) {
+  if (error) throw error;
+  if (hasKey) {
+		storage.get('capitalizePreference', function(error, data) {
+		  if (error) throw error;
+	    document.getElementById("autoCapitalize").value = data.capitalizePreference;
+		});
+  }
+	else {
+		storage.set('capitalizePreference', { capitalizePreference: "off" }, function(error) {
+			if (error) throw error;
+		});
+    document.getElementById("autoCapitalize").value = "off";
+	}
+});
 
 // set current date and open/select the entry for today
 var todayRaw = new Date();
@@ -194,9 +228,69 @@ function save() {
     }
 }
 
+var markdownPreviewMode = false;
+var converter = new showdown.Converter()
+function toggleMarkdown() {
+  markdownPreviewMode = !markdownPreviewMode;
+  if (markdownPreviewMode) {
+    updateMarkdown();
+    //$('#textArea').addClass("hide")
+    $('#textBox').removeClass("col-md-12 col-lg-12")
+    $('#textBox').addClass("col-md-6 col-lg-6")
+    $('#markdownPreview').removeClass("hide")
+  } else {
+    $('#markdownPreview').addClass("hide")
+    $('#textBox').addClass("col-md-12 col-lg-12")
+    $('#textBox').removeClass("col-md-6 col-lg-6")
+    //$('#textArea').removeClass("hide")
+  }
+}
+
+function updateMarkdown() {
+  let v = document.getElementById("textArea").value + "";
+  v = v.replace(/{jf}/g, "file://" + journalDirectory);
+  const textToHtml = converter.makeHtml(v);
+  $('#markdownPreview').html(textToHtml);
+}
+
+function setCapitalize(mode) {
+  document.getElementById("textArea").style.textTransform = mode;
+	storage.set('capitalizePreference', { capitalizePreference: mode }, function(error) {
+		if (error) throw error;
+	});
+}
+
+function updateCapitalize() {
+  if (document.getElementById("autoCapitalize").value === "sentences") {
+    let t = document.getElementById("textArea");
+    var sel = getInputSelection(t);
+    let v = t.value;
+    v = v.charAt(0).toUpperCase() + v.slice(1)
+    let capitalize_dots = (s) => ". " +  s.charAt(2).toUpperCase()
+    v = v.replace(/(\. [a-z])/g, capitalize_dots);
+    let capitalize_newlines = (s) => "\n" +  s.charAt(1).toUpperCase()
+    v = v.replace(/(\n[a-z])/g, capitalize_newlines);
+    document.getElementById("textArea").value = v;
+    setInputSelection(t, sel.start, sel.end);
+  }
+}
+
+function updateAll() {
+  updateCapitalize();
+  updateMarkdown();
+}
+
 function setFont(size) {
   document.getElementById("textArea").style.fontSize = size + 'px';
 	storage.set('fontSizePreference', { fontSizePreference: size }, function(error) {
+		if (error) throw error;
+	});
+}
+
+function setFontType(fontType) {
+  document.getElementById("textArea").style.fontFamily = fontType;
+  document.getElementById("markdownPreview").style.fontFamily = fontType;
+	storage.set('fontTypePreference', { fontTypePreference: fontType }, function(error) {
 		if (error) throw error;
 	});
 }

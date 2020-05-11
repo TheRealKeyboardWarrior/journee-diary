@@ -47,13 +47,16 @@ app.on('ready', function () {
     'y': mainWindowState.y,
     'width': mainWindowState.width,
     'height': mainWindowState.height,
-    title: 'Journee',
+    title: 'Journee++',
     icon: __dirname + '/app/assets/icons/journee.png',
     backgroundColor: 'red',
+    webPreferences: {
+      nodeIntegration: true
+    }
   });
 
 //  win.setMenu(null);
-  win.loadURL(`file://${__dirname}/index.html`)
+  win.loadURL(`file://${__dirname}/app/index.html`)
 
   // Let us register listeners on the window, so we can update the state
   // automatically (the listeners will be removed when the window is closed)

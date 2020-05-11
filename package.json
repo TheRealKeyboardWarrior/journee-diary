@@ -17,26 +17,30 @@
   "license": "Apache-2.0",
   "main": "main.js",
   "dependencies": {
-    "electron-json-storage": "^3.0.1",
-    "electron-window-state": "^4.0.2"
+    "electron-json-storage": "^4.1.8",
+    "electron-window-state": "^5.0.3",
+    "async": "^2.5.0",
+    "showdown": "1.9.1",
+    "bootstrap-add-clear": "^1.0.7",
+    "find-in-files": "^0.4.0",
+    "moment": "^2.18.1"
   },
   "devDependencies": {
-    "electron": "^1.4.15",
-    "electron-builder": "^13.11.1"
+    "electron": "^8.2.5",
+    "electron-builder": "^22.6.0"
   },
   "scripts": {
     "postinstall": "install-app-deps",
-    "start": "electron ./app --enable-logging",
+    "start": "electron . --enable-logging",
     "dev": "NODE_ENV='development' npm run start",
-    "dist": "build --win",
-    "distl": "build -l"
+    "dist": "electron-builder --win",
+    "distl": "electron-builder -l"
   },
   "build": {
-    "synopsis": "A daily journal app",
     "appId": "com.adueck.journee",
     "nsis": {
-    "artifactName": "${productName}-${version}-setup.${ext}",
-    "deleteAppDataOnUninstall": true
+      "artifactName": "${productName}-${version}-setup.${ext}",
+      "deleteAppDataOnUninstall": true
     },
     "asar": true,
     "forceCodeSigning": false

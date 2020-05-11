@@ -28,7 +28,7 @@ function checkIfDirectoryIsClean(dir) {
 }
 
 function chooseDirectory() {
-  dialogAnswer =  dialog.showOpenDialog(
+  dialogAnswer =  dialog.showOpenDialogSync(
     { properties: [ 'openDirectory' ] }
   );
   if (typeof dialogAnswer == 'object') {
@@ -54,7 +54,7 @@ function chooseDirectoryApplied(directoryChosen) {
 }
 
 function initialChooseDirectory() {
-  dialogAnswer =  dialog.showOpenDialog(
+  dialogAnswer =  dialog.showOpenDialogSync(
     { properties: [ 'openDirectory' ] }
   );
   if (typeof dialogAnswer == 'object') {
