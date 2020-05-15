@@ -4,6 +4,10 @@ var calendarMonth;
 var calendarYear;
 require('bootstrap-add-clear');
 var showdown = require('showdown');
+showdown.setOption("tables", true)
+showdown.setOption("strikethrough", true)
+showdown.setOption("literalMidWordUnderscores", true)
+showdown.setOption("parseImgDimensions", true)
 
 //TODO: check to see if chosen folder exists when opening
 
@@ -184,9 +188,9 @@ function giveMeDate(id) {
       saveEntry(previousFileOpen, document.getElementById("textArea").value);
     }
 		// TODO: do something more efficient than trying to delete a file on every change.
-    else if (document.getElementById("textArea").value == "" && previousFileOpen !== currentFileOpen)  {
-      deleteEntry(previousFileOpen);
-    }
+    //else if (document.getElementById("textArea").value == "" && previousFileOpen !== currentFileOpen)  {
+    //  deleteEntry(previousFileOpen);
+    //}
     if (hasEvent && currentFileOpen !== previousFileOpen) {
       document.getElementById("textArea").value = readEntry(currentFileOpen);
     }
@@ -205,9 +209,9 @@ function fromSearchDate(arg) {
       saveEntry(previousFileOpen, document.getElementById("textArea").value);
     }
 		// TODO: do something more efficient than trying to delete a file on every change.
-    else if (document.getElementById("textArea").value == "" && previousFileOpen !== currentFileOpen)  {
-      deleteEntry(previousFileOpen);
-    }
+    //else if (document.getElementById("textArea").value == "" && previousFileOpen !== currentFileOpen)  {
+    //  deleteEntry(previousFileOpen);
+    //}
 		if (previousFileOpen !== currentFileOpen) {
 			document.getElementById("textArea").value = readEntry(currentFileOpen);
     	restingStatusText();
